@@ -12,6 +12,7 @@ public class Edge{
   private String paraderoOrigen;
   private String paraderoDestino;
   private int tiempo;
+  private int mejorIdBus;
   private List<Integer> idBuses = new ArrayList<>();  //Por si se actualiza y el edge pertenece a varias rutas
 
   //No tiene sentido crear un edge sin información (buena practica de programacion)
@@ -20,6 +21,7 @@ public class Edge{
     this.paraderoDestino = paraderoDestino;
     this.tiempo = tiempo;
     this.idBuses.add(idBus);
+    this.mejorIdBus = idBus;
   }
 
   public Edge(String[] info){
@@ -27,6 +29,7 @@ public class Edge{
     this.paraderoDestino = info[1];
     this.tiempo = Integer.parseInt(info[2]);
     this.idBuses.add(Integer.parseInt(info[3]));
+    this.mejorIdBus = Integer.parseInt(info[3]);
   }
 
   public String getParaderoOrigen() {
@@ -53,12 +56,21 @@ public class Edge{
     return this.idBuses.get(index);
   }
 
+  public int getMejorIdBus(){
+    return  this.mejorIdBus;
+  }
+
   public List<Integer> getIdBuses() {
     return idBuses;
   }
   public void setIdBus(int idBus) {
     this.idBuses.add(idBus);
   }
+
+  public void setMejorIdBus(int idBus) {
+    this.mejorIdBus = idBus;
+  }
+
 
   public int getIdBusesSize(){
     return idBuses.size();
@@ -67,11 +79,9 @@ public class Edge{
 
 
   public String[] getEdgeInfo(){
-    String[] info = {paraderoOrigen, paraderoDestino, String.valueOf(tiempo), idBuses.toString()};
+    String[] info = {paraderoOrigen, paraderoDestino, String.valueOf(tiempo), idBuses.toString(), String.valueOf(mejorIdBus)};
     return info;
   }
-
-
 
 
   @Override
@@ -80,7 +90,8 @@ public class Edge{
             "paraderoOrigen='" + paraderoOrigen + '\'' +
             ", paraderoDestino='" + paraderoDestino + '\'' +
             ", tiempo=" + tiempo +
-            ", idBus=" + idBuses.toString() +
+            ", mejorIdBus=" + mejorIdBus +
+            ", idBuses=" + idBuses +
             '}';
   }
 }

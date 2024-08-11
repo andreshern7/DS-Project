@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Nodo {
+class Node {
 
   //                 {paradero , infomacion}
   //Representación ruta {A, [{B,60,3},{Z,150,4}]}
@@ -13,7 +13,7 @@ class Nodo {
 
   // private int aristaCounter = 0;
   // private String[3] informacion;
-  Nodo(String pOrigen) {
+  Node(String pOrigen) {
     this.origen = pOrigen;
     aristas = new ArrayList<Edge>();
   }
@@ -41,6 +41,11 @@ class Nodo {
     edge.setIdBus(Integer.parseInt(info[3]));
     this.aristas.set(index, edge);
   }
+
+  public void setAristaMejorId(int index, int idBus){
+      aristas.get(index).setMejorIdBus(idBus);
+  }
+
 
   public void addArista(String[] info) {
     this.aristas.add(getEdge(info));

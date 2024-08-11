@@ -9,9 +9,9 @@ public class Input {
 
   public static List<String[]> getRutas() {
     Scanner scanner = new Scanner(System.in);
-    //System.out.print("Escribe el nombre del archivo que quieres escanear: ");
-    //String fileName = scanner.nextLine();  //Nombre del archivo a leer
-    String fileName = "rutas.txt"; //TEST ENVIRONMENT
+    System.out.print("Escribe el nombre del archivo que quieres escanear: ");
+    String fileName = scanner.nextLine();  //Nombre del archivo a leer
+//    String fileName = "rutas.txt"; //TEST ENVIRONMENT
     if (!fileName.contains(".txt")) {
       fileName = fileName + ".txt";
     }

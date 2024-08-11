@@ -1,27 +1,27 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.TreeMap;
 
-public class Rutas {
+public class Routes {
 
-  private TreeMap<String, Nodo> lista_ady = new TreeMap<>();
+  private TreeMap<String, Node> lista_ady = new TreeMap<>();
 
   //Representa un arreglo para identificar una ruta y su nodo inicial
   //{3: 'obj:nodo':{A:'obj:aristas'}}
-  private TreeMap<Integer, Nodo> nodoInicialRuta = new TreeMap<>();
+  private TreeMap<Integer, Node> nodoInicialRuta = new TreeMap<>();
 
   // private TreeMap<String, Nodo> lista_ady = new TreeMap<>();
   // Representación del grafo por lista de adyacencia
   // Representa todo el grafo, pero la idea es dejarlo por fuera para que el TreeMap solo almacene objetos de tipo ruta # TODO
   //A= [{B,60,3},{Z,150,4}]
-  Rutas(List<String[]> rutas) {
+  Routes(List<String[]> rutas) {
     creacionGrafo(rutas);
   }
 
   public void creacionGrafo(List<String[]> rutas) {
     // ruta es la lista que contiene el bus, los paraderos en 1+2n y los tiemps en 2+2n
-    Nodo nodo;
+    Node nodo;
     for (String[] ruta : rutas) {
       //ruta[0] es el bus que pasa por los paraderos
       String bus = ruta[0];  //identificador bus
@@ -30,11 +30,11 @@ public class Rutas {
         if (j == 1) {
 //          String variable = valor != null ? valor : "valor_por_defecto";
 
-          nodo = Objects.requireNonNullElse(lista_ady.get(paraderoActual), new Nodo(paraderoActual)); //Nodo inicial
+          nodo = Objects.requireNonNullElse(lista_ady.get(paraderoActual), new Node(paraderoActual)); //Nodo inicial
 //          nodoInicialRuta.putIfAbsent(Integer.parseInt(ruta[0]), nodo);
           nodoInicialRuta.put(Integer.parseInt(ruta[0]), nodo);
         } else {
-          nodo = Objects.requireNonNullElse(lista_ady.get(paraderoActual), new Nodo(paraderoActual));
+          nodo = Objects.requireNonNullElse(lista_ady.get(paraderoActual), new Node(paraderoActual));
         }
         if (j == ruta.length - 1) { //final de la linea
           // lista_ady.putIfAbsent(ruta[j], new ArrayList<>());
@@ -62,6 +62,7 @@ public class Rutas {
             updated = true;
             if (Integer.parseInt(existente[2]) > Integer.parseInt(tiempo)) {
               nodo.setArista(k, info);
+              nodo.setAristaMejorId(k, Integer.parseInt(info[3]));
               break;
             }
           }
@@ -85,12 +86,12 @@ public class Rutas {
     if (nodoInicialRuta.isEmpty()) {
       return;
     }
-    Nodo nodoInicial = null;
+    Node nodoInicial = null;
     for (Integer id : nodoInicialRuta.keySet()) {
       nodoInicial = nodoInicialRuta.get(id);
 
       System.out.println("RUTA #" + id);
-      Nodo nodo = nodoInicial;
+      Node nodo = nodoInicial;
       int index;
       while (nodo.tieneEdge()) {
         boolean perteneceRuta = false;
@@ -107,6 +108,17 @@ public class Rutas {
         }
       }
     }
+  }
+
+  void imprimirMejorRuta(){
+    Path path = new Path(lista_ady);
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Escribe el paredero de origen: ");
+    String origen = scanner.nextLine();
+    System.out.println("Escribe el paredero de destino: ");
+    String destino = scanner.nextLine();
+    path.imprimirCamino(origen, destino);
+    scanner.close();
   }
 
 }

@@ -8,39 +8,40 @@ public class Camino {
 	public Camino(List<String[]> rutas) {
 		creacionGrafo(rutas);
 	}
+  
 	private void creacionGrafo(List<String[]> rutas) {
-		// ruta es la lista que contiene el bus, los paaderos en 1+2n y los tiemps en 2+2n
+		// ruta es la lista que contiene el bus, los paraderos en 1+2n y los tiemps en 2+2n
 		for (String[] ruta : rutas) {
 			//ruta[0] es el bus que pasa por los paraderos
 			String bus = ruta[0];  //identificador bus
 			for (int j = 1; j<=ruta.length-1; j = j+2) {
-				if (j == ruta.length-1) { //final de la linea
+				if (j == ruta.length-1) { //final de la linea 
 					lista_ady.putIfAbsent(ruta[j], new ArrayList<>());
 					break;
 				}
 				String paraderoActual = ruta[j];
-	            String paraderoSiguiente = ruta[j+2];
-	            String tiempo = ruta[j+1];
-	            String[] info = {paraderoSiguiente, tiempo, bus};
+        String paraderoSiguiente = ruta[j+2];
+        String tiempo = ruta[j+1];
+        String[] info = {paraderoSiguiente, tiempo, bus};
 				// Si la lista no contiene el paradero como vértice, se conecta a él
-	            lista_ady.putIfAbsent(paraderoActual, new ArrayList<>());
-	            List<String[]> listaAdyacencia = lista_ady.get(paraderoActual);
-	            // Verificar si ya existe una ruta entre los mismos paraderos y actualizar si es necesario
-                // Revisar que siempre se elija el tiempo menor
-	            boolean updated = false;
-	            for (int k = 0; k < listaAdyacencia.size(); k++) {
-	                String[] existente = listaAdyacencia.get(k);
-	                if (existente[0].equals(paraderoSiguiente)) {
-	                	updated = true;
-	                	if (Integer.parseInt(existente[1]) > Integer.parseInt(tiempo)) {
-	                    listaAdyacencia.set(k, info);
-	                    break;
-	                }
-	            }
-	            }
-	            if (!updated) {
-	                listaAdyacencia.add(info);
-	            }
+        lista_ady.putIfAbsent(paraderoActual, new ArrayList<>());
+        List<String[]> listaAdyacencia = lista_ady.get(paraderoActual);
+        // Verificar si ya existe una ruta entre los mismos paraderos y actualizar si es necesario
+          // Revisar que siempre se elija el tiempo menor
+        boolean updated = false;
+        for (int k = 0; k < listaAdyacencia.size(); k++) {
+            String[] existente = listaAdyacencia.get(k);
+            if (existente[0].equals(paraderoSiguiente)) {
+              updated = true;
+              if (Integer.parseInt(existente[1]) > Integer.parseInt(tiempo)) {
+                listaAdyacencia.set(k, info);
+                break;
+              }
+            }
+        }
+        if (!updated) {
+            listaAdyacencia.add(info);
+        }
 			}
 		}
 	}
@@ -148,6 +149,6 @@ public class Camino {
 			rutas.add(ruta);
 		}
 		Camino cm = new Camino(rutas);
-		cm.ImprimirCamino("A","F");
+		cm.ImprimirCamino("A","X");
 	}
 }
