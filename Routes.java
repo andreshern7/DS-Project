@@ -64,6 +64,8 @@ public class Routes {
               nodo.setArista(k, info);
               nodo.setAristaMejorId(k, Integer.parseInt(info[3]));
               break;
+            }else{
+              nodo.addIdBus(k, Integer.parseInt(info[3]));
             }
           }
         }

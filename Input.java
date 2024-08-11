@@ -23,6 +23,9 @@ public class Input {
       for (int i = 0; i < numeroRutas; i++) {
         String[] partesRuta = br.readLine().split(" ");
         int idRuta = Integer.parseInt(partesRuta[0]);
+        if(idRuta < 0){
+          continue;
+        }
         rutas.add(partesRuta);
       }
     } catch (IOException e) {

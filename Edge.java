@@ -63,7 +63,7 @@ public class Edge{
   public List<Integer> getIdBuses() {
     return idBuses;
   }
-  public void setIdBus(int idBus) {
+  public void addIdBus(int idBus) {
     this.idBuses.add(idBus);
   }
 

@@ -38,8 +38,12 @@ class Node {
     edge.setParaderoOrigen(info[0]);
     edge.setParaderoDestino(info[1]);
     edge.setTiempo(Integer.parseInt(info[2]));
-    edge.setIdBus(Integer.parseInt(info[3]));
+    edge.addIdBus(Integer.parseInt(info[3]));
     this.aristas.set(index, edge);
+  }
+
+  public void addIdBus(int index, int idBus){
+    aristas.get(index).addIdBus(idBus);
   }
 
   public void setAristaMejorId(int index, int idBus){
