@@ -1,3 +1,5 @@
+package backend;
+
 import java.util.*;
 
 public class Path {
@@ -72,12 +74,12 @@ public class Path {
   }
 
 
-  public void imprimirCamino(String origen, String destino) {
+  public  String imprimirCamino(String origen, String destino) {
     List<String> paraderos = CaminoMasCorto(origen, destino);
-    imprimirCaminoP(paraderos);
+    return imprimirCaminoP(paraderos);
   }
 
-  private void imprimirCaminoP(List<String> paraderos) {
+  private String imprimirCaminoP(List<String> paraderos) {
     List<Integer> buses = new ArrayList<>();
 //    for (String paradero : paraderos) {
 //      System.out.println(paradero);
@@ -104,7 +106,8 @@ public class Path {
         }
       }
       respuesta.append(" hasta llegar a la parada " + paraderos.get(paraderos.size() - 1));
-      System.out.println(respuesta);
+//      System.out.println(respuesta);
+      return respuesta.toString();
 
   }
 }

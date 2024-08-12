@@ -1,4 +1,7 @@
+package backend;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,18 +10,18 @@ import java.util.Scanner;
 
 public class Input {
 
-  public static List<String[]> getRutas() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Escribe el nombre del archivo que quieres escanear: ");
-    String fileName = scanner.nextLine();  //Nombre del archivo a leer
+  public static List<String[]> getRutas(File file) {
+//    Scanner scanner = new Scanner(System.in);
+//    System.out.print("Escribe el nombre del archivo que quieres escanear: ");
+//    String fileName = scanner.nextLine();  //Nombre del archivo a leer
 //    String fileName = "rutas.txt"; //TEST ENVIRONMENT
-    if (!fileName.contains(".txt")) {
-      fileName = fileName + ".txt";
-    }
+//    if (!fileName.contains(".txt")) {
+//      fileName = fileName + ".txt";
+//    }
     List<String[]> rutas = new ArrayList<>();
 
     // Leer el archivo
-    try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
       int numeroRutas = Integer.parseInt(br.readLine().trim());
       if(!(numeroRutas >= 1 && numeroRutas <= 10000)){
         System.out.println("El sistema de transporte publico de Nueva Konigsberg no puede tener más de 10000 rutas");

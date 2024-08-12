@@ -1,3 +1,5 @@
+package backend;
+
 import java.util.*;
 import java.util.LinkedList;
 
@@ -149,6 +151,6 @@ public class Camino {
 			rutas.add(ruta);
 		}
 		Camino cm = new Camino(rutas);
-		cm.ImprimirCamino("A","X");
+		cm.ImprimirCamino("A","B");
 	}
 }

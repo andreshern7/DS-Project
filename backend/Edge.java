@@ -1,3 +1,5 @@
+package backend;
+
 //Está clase solo sirve para representar la información de una arista(conceptualmente)
 //Clase Modelo
 //ParaderoOrigen

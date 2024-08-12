@@ -1,3 +1,5 @@
+package backend;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -15,7 +17,7 @@ public class Routes {
   // Representación del grafo por lista de adyacencia
   // Representa todo el grafo, pero la idea es dejarlo por fuera para que el TreeMap solo almacene objetos de tipo ruta # TODO
   //A= [{B,60,3},{Z,150,4}]
-  Routes(List<String[]> rutas) {
+  public Routes(List<String[]> rutas) {
     creacionGrafo(rutas);
   }
 
@@ -112,15 +114,16 @@ public class Routes {
     }
   }
 
-  void imprimirMejorRuta(){
+  public String imprimirMejorRuta(String origen, String destino){
     Path path = new Path(lista_ady);
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Escribe el paredero de origen: ");
-    String origen = scanner.nextLine();
-    System.out.println("Escribe el paredero de destino: ");
-    String destino = scanner.nextLine();
-    path.imprimirCamino(origen, destino);
-    scanner.close();
+//    Scanner scanner = new Scanner(System.in);
+//    System.out.println("Escribe el paredero de origen: ");
+//    String origen = scanner.nextLine();
+//    System.out.println("Escribe el paredero de destino: ");
+//    String destino = scanner.nextLine();
+//    scanner.close();
+    return path.imprimirCamino(origen, destino);
+
   }
 
 }
