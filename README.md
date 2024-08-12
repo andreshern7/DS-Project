@@ -1,9 +1,9 @@
-#Ejecución con ejecutable
+# Ejecución con ejecutable
 Para la activacion de la interfaz en necesario que el usuario instale el Full JDK 22 de BellSoft Liberica en el siguiente link https://bell-sw.com/pages/downloads/#jdk-22.
 Este JDK tiene integrada la libreria de JavaFX, la cual es encargada de la parte grafica de la aplicacion
 Posterior a este ejecute el archivo Project.jar que es el ejecutable del proyecto:
 
-#Ejecución por editor de código
+# Ejecución por editor de código
 Para la activacion de la interfaz en necesario que el usuario tenga instalado JavaFK y ejecute el archivo que se encuentra en la carpeta frontend, para esto se le dará un paso a paso:
 Paso 1: verifique que tiene JavaFX, la función de este es facilitar la conxion del archivo Main.java a los archivos que se encuentran en la carpeta backend.
 Paso 1.2: si no tiene JavaFX lo puede descarga en el siguiente link https://gluonhq.com/products/javafx/ dependiendo de sus necesidades, sistema operativo, arquitectura y tipo (se recomienda SDK).
