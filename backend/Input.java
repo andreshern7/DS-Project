@@ -42,7 +42,7 @@ public class Input {
 
   private static boolean datosCorrectos(String[] partesRuta){
     int idRuta = Integer.parseInt(partesRuta[0]);
-    System.out.println(partesRuta.length);
+//    System.out.println(partesRuta.length);
     if(idRuta < 0){
 //      System.out.println("RUTA #" + idRuta + " id invalido");
       return false;

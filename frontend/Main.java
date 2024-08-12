@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -48,6 +50,7 @@ public class Main extends Application {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Seleccionar Archivo de Rutas");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+//            fileChooser.setInitialDirectory(new File("/C:/Users/Andres/Documents/Andres/UNAL/4 SEMESTER/Data Structures/Project"));
             archivoSeleccionado[0] = fileChooser.showOpenDialog(primaryStage);
 
             Alert a = new Alert(AlertType.NONE);
@@ -64,8 +67,6 @@ public class Main extends Application {
                 a.setContentText("Se ha cargado el archivo " + archivoSeleccionado[0].getName());
 //                System.out.println("Se está cargando el archivo " + archivoSeleccionado[0].getName());  //Solo el nombre
 //                System.out.println("Se está cargando el archivo " + archivoSeleccionado[0].toString()); //Todo el path
-
-
             }
             // show the dialog
             a.show();
@@ -99,7 +100,9 @@ public class Main extends Application {
 
                 // Mostrar la salida en el resultadoLabel
 //                String resultado = baos.toString();
-//                resultadoLabel.
+                resultadoLabel.setMaxWidth(350);
+                resultadoLabel.setMaxHeight(50);
+                resultadoLabel.setWrapText(true);
                 resultadoLabel.setText(respuesta.isEmpty() ? "No se encontró una ruta entre " + origen + " y " + destino : respuesta);
             } else {
                 Alert a = new Alert(AlertType.NONE);
@@ -119,6 +122,7 @@ public class Main extends Application {
         Scene scene = new Scene(layout, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Planificador de Rutas");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
