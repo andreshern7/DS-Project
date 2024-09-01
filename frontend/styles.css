@@ -1,0 +1,42 @@
+/* styles.css */
+
+.root {
+    -fx-font-family: "Arial";
+    -fx-background-color: #f0f0f0;
+}
+
+.button {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #005fa3;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-pref-height: 140px;  /* Asegura una altura mínima */
+}
+
+.scroll-pane {
+    -fx-pref-height: 140px;  /* Asegura una altura mínima */
+}
