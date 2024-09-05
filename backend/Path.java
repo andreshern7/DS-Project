@@ -17,15 +17,24 @@ public class Path {
     // El padre tiene como llave el vértice hijo, y el valor como el vértice padre, esto será util para saber el
     // camino mas corto
     Map<String, String> padre = new HashMap<>(); // Para recorrer el camino
+    // Como llave tiene el paradero, como valor tiene el número de rutas que para llegar a este desde el origen en el
+    // menor tiempo posible
+    Map<String, Integer> numeroRutas = new HashMap<>();
+    // Como llave tiene el paradero, como valor tienen la última ruta que ha tenido, es decir, la ruta del padre
+    // hacia el paradero
+    Map<String, Integer> mejorRuta = new HashMap<>();
     // la cola se basa en comparar cual vértice tiene menor distancia, esto para visitar los vértices más cercanos
-    PriorityQueue<String> cola = new PriorityQueue<>(Comparator.comparingInt(distancia::get)); //
+    PriorityQueue<String> cola = new PriorityQueue<>(Comparator.comparingInt(distancia::get).thenComparing(numeroRutas::get)); //
 
     // Se pone como valor infinito a cada recorrido entre paraderos
     for (String paradero : grafoRutas.keySet()) {
       distancia.put(paradero, Integer.MAX_VALUE);
+      numeroRutas.put(paradero, Integer.MAX_VALUE);
+      mejorRuta.put(paradero, -1);
     }
     // El vértice inicial tiene recorrido 0
     distancia.put(origen, 0);
+    numeroRutas.put(origen, 0);
     cola.add(origen);
 
     while (!cola.isEmpty()) {
@@ -45,14 +54,22 @@ public class Path {
         Node vecino = grafoRutas.get(paraderoActual);
         String paraderoSiguiente = vecino.getArista(i).getParaderoDestino();
         int pesoArista = vecino.getArista(i).getTiempo();
+        int rutaSiguiente = vecino.getArista(i).getMejorIdBus();
         // Si ya está visitado el vértice siguiente no hay necesidad de ver si tiene un mejor camino
         int nuevaDistancia = distancia.get(paraderoActual) + pesoArista;
-        // Si la distancia del recorrido del paradero actual al paradero inicial mas la distancia del recorrido del paradero
-        // actual al paradero siguiente es menor a la distancia actual del paradero siguiente, se cambia la distancia actual
-        // por la distancia menor
-        if (nuevaDistancia < distancia.get(paraderoSiguiente)) {
+        // Se entre al if si la nueva distancia es menor a la actual o si las distancias son iguales pero el número de
+        // trasbordos del nuevo nodo es menor que el que ya tenía la arista
+        if (nuevaDistancia < distancia.get(paraderoSiguiente) ||
+                (nuevaDistancia == distancia.get(paraderoSiguiente) &&
+                        numeroRutas.get(paraderoActual) + (rutaSiguiente != mejorRuta.get(paraderoActual) ? 1 : 0)
+                                < numeroRutas.get(paraderoSiguiente))) {
           distancia.put(paraderoSiguiente, nuevaDistancia);
           padre.put(paraderoSiguiente, paraderoActual);
+          // Mira si hay una nueva ruta o no
+          int nuevasRutas = numeroRutas.get(paraderoActual) + (rutaSiguiente != mejorRuta.get(paraderoActual) ? 1 : 0);
+          // añade las rutas
+          numeroRutas.put(paraderoSiguiente, nuevasRutas);
+          mejorRuta.put(paraderoSiguiente, rutaSiguiente);
           // se añade a la cola pues acaba de ser visitado
           cola.add(paraderoSiguiente);
         }
@@ -76,11 +93,19 @@ public class Path {
 
   public  String imprimirCamino(String origen, String destino) {
     List<String> paraderos = CaminoMasCorto(origen, destino);
-    return imprimirCaminoP(paraderos);
+    if (paraderos == null) {
+      // Mensaje cuando no hay un camino posible
+      return "No existe un camino posible entre " + origen + " y " + destino + ".";
+    } else {
+      // Imprime el camino normalmente si existe
+      return imprimirCaminoP(paraderos);
+    }
+
   }
 
   private String imprimirCaminoP(List<String> paraderos) {
     List<Integer> buses = new ArrayList<>();
+
 //    for (String paradero : paraderos) {
 //      System.out.println(paradero);
 //    }
@@ -94,20 +119,20 @@ public class Path {
       }
     }
 
-      //------------------------------
-      //DAR LA RESPUESTA FINAL AL USUARIO
-      //------------------------------
-      StringBuilder respuesta = new StringBuilder();
-      // System.out.println("\n"+buses.toString()+"\n");
-      respuesta.append("Tomar el bus " + buses.get(0) + " en la parada " + paraderos.get(0));
-      for (int j = 0; j < buses.size() - 1; j++) {
-        if (buses.get(j) != buses.get(j + 1)) {
-          respuesta.append(" luego bajarse en la parada " + paraderos.get(j + 1) + " tomar el bus " + buses.get(j + 1));
-        }
+    //------------------------------
+    //DAR LA RESPUESTA FINAL AL USUARIO
+    //------------------------------
+    StringBuilder respuesta = new StringBuilder();
+    // System.out.println("\n"+buses.toString()+"\n");
+    respuesta.append("Tomar el bus " + buses.get(0) + " en la parada " + paraderos.get(0));
+    for (int j = 0; j < buses.size() - 1; j++) {
+      if (buses.get(j) != buses.get(j + 1)) {
+        respuesta.append(" luego bajarse en la parada " + paraderos.get(j + 1) + " tomar el bus " + buses.get(j + 1));
       }
-      respuesta.append(" hasta llegar a la parada " + paraderos.get(paraderos.size() - 1));
+    }
+    respuesta.append(" hasta llegar a la parada " + paraderos.get(paraderos.size() - 1));
 //      System.out.println(respuesta);
-      return respuesta.toString();
+    return respuesta.toString();
 
   }
 }
