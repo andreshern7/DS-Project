@@ -34,9 +34,9 @@
     -fx-border-color: #ccc;
     -fx-padding: 10px;
     -fx-border-radius: 5px;
-    -fx-pref-height: 140px;  /* Asegura una altura mínima */
+    -fx-pref-height: 130px;  /* Asegura una altura mínima */
 }
 
 .scroll-pane {
-    -fx-pref-height: 140px;  /* Asegura una altura mínima */
+    -fx-pref-height: 130px;  /* Asegura una altura mínima */
 }
